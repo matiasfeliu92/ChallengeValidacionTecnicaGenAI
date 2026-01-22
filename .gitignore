@@ -1,0 +1,5 @@
+challenge
+*.pdf
+*.env
+*.sqlite3
+__pycache__/
