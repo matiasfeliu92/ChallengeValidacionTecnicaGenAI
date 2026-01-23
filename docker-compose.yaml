@@ -9,18 +9,15 @@ x-airflow-common:
     AIRFLOW__CORE__SQL_ALCHEMY_CONN: "postgresql+psycopg2://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres/${POSTGRES_DB}"
     AIRFLOW__CORE__DAGS_ARE_PAUSED_AT_CREATION: 'true'
     AIRFLOW__API__AUTH_BACKENDS: 'airflow.api.auth.backend.basic_auth'
-    KAGGLE_USERNAME: ${KAGGLE_USERNAME}
-    KAGGLE_KEY: ${KAGGLE_KEY}
     _PIP_ADDITIONAL_REQUIREMENTS: ""
   volumes:
     - ./dags:/opt/airflow/dags
     - ./logs:/opt/airflow/logs
     - ./plugins:/opt/airflow/plugins
     - ./data:/opt/airflow/data
-    # - ./.dbt:/home/airflow/.dbt
+    - C:/Users/hp/.dbt:/home/airflow/.dbt
     - ./src:/opt/airflow/src
-    # - ./european_leagues_DBT:/opt/airflow/european_leagues_DBT
-    # - .kaggle/kaggle.json:/home/airflow/.config/kaggle/kaggle.json:ro
+    - ./technical_challenge:/opt/airflow/technical_challenge
   user: "${AIRFLOW_UID}:0"
   depends_on:
     - postgres

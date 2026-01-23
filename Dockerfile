@@ -1,7 +1,8 @@
-FROM apache/airflow:2.8.1-python3.11
+FROM apache/airflow:2.8.1
 
 COPY requirements.txt .
-RUN pip install --upgrade pip
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install --upgrade pip && pip install --no-cache-dir -r requirements.txt
+
+COPY dags/ /opt/airflow/dags/
 
 ENV PYTHONPATH=${PYTHONPATH}:/opt/airflow/src
