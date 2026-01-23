@@ -1,0 +1,12 @@
+version: 2
+
+sources:
+  - name: raw  # Este es el primer argumento que usas en {{ source('raw', '...') }}
+    database: ChallengeIA  # Opcional en Postgres, pero recomendado
+    schema: public             # El esquema donde creaste la tabla con Python
+    tables:
+      - name: raw_event_logs   # Este es el segundo argumento
+        description: "Tabla con los logs de eventos en formato JSON crudo"
+        columns:
+          - name: data
+            description: "Campo JSONB con la info del evento"

@@ -1,0 +1,10 @@
+version: 2
+
+sources:
+  - name: raw
+    database: ChallengeIA
+    schema: public
+
+    tables:
+      - name: raw_events_logs
+        description: "Tabla de logs sin procesar"

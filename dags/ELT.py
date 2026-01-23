@@ -3,6 +3,8 @@ import os
 from airflow.models.dag import DAG
 from airflow.operators.python import PythonOperator
 from airflow.operators.bash import BashOperator
+from airflow.providers.docker.operators.docker import DockerOperator
+from docker.types import Mount
 
 from src.scripts import ExtractData, LoadData
 
@@ -35,10 +37,10 @@ with DAG(
         task_id="extract_data", 
         python_callable=extract_and_load
     )
-    # transform_with_DBT = BashOperator(
-    #     task_id="transform_with_DBT",
-    #     bash_command="cd /opt/airflow/european_leagues_DBT && dbt run --select stg_football_data int_team_match_performance --profiles-dir /home/airflow/.dbt",
-    #     dag=dag,
-    # )
+    dbt_run_task = BashOperator(
+        task_id="transform_with_DBT",
+        bash_command="cd /opt/airflow/technical_challenge && dbt run --profiles-dir /home/airflow/.dbt",
+        dag=dag,
+    )
 
-    extract_and_load_data ##>> transform_with_DBT
+    extract_and_load_data >> dbt_run_task
